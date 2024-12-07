@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Number Guessing Game</title>
+</head>
+<body>
+    <h1><div align="center">113306087_Lab3_Number Guessing Game</div></h1>
+    <div align="center" id="resultImage"></div>
+    <script>
+        var random = Math.floor(Math.random() * 100) + 1;
+        var attempts = 7; 
+        var int = 0;
+        var minRange = 1;
+        var maxRange = 100;
+
+        while (int < attempts) {
+            var input = window.prompt("請輸入" + minRange+"-"+maxRange+ "之間的數字\n還剩下 " + (attempts - int) + " 次機會");
+            
+            if (isNaN(input) || input.trim() == "") {
+                alert("輸入取消或無效，請重新輸入!");
+                continue;
+            }
+            input = Number(input);
+
+            if (input <= 1 || input >= 100) {
+                alert("請輸入有效範圍內的數字! (不能選擇範圍的上下限)");
+                continue;
+            }
+
+            if (input == random) {
+                alert("恭喜你答對了!");
+                document.getElementById("resultImage").innerHTML = '<img src="correct.JPG" alt="correct" />';
+                break;
+            } else if (input < random) {
+                alert("太小了!再試一次");
+                minRange = input;
+            } else {
+                alert("太大了!再試一次");
+                maxRange = input;
+            }
+
+            int++; 
+
+            if (int == attempts) {
+                alert("機會已用完! 正確答案是: " + random);
+                document.getElementById("resultImage").innerHTML = '<img src="wrong.JPG" alt="wrong" />';
+            }
+        }
+    </script>
+</body>
+</html>
